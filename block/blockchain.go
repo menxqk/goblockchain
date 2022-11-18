@@ -171,7 +171,7 @@ func (bc *Blockchain) VerifyTransactionSignature(senderPublicKey *ecdsa.PublicKe
 }
 
 func (bc *Blockchain) CopyTransactionPool() []*BlockTransaction {
-	transactions := make([]*BlockTransaction, len(bc.transactionPool))
+	transactions := make([]*BlockTransaction, 0)
 	for _, t := range bc.transactionPool {
 		transactions = append(transactions, NewTransaction(t.senderBlockchainAddress, t.recipientBlockchainAddress, t.value))
 	}
