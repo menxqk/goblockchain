@@ -11,8 +11,11 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"path"
+	"path/filepath"
 	"strconv"
+	"strings"
 )
 
 const templDir = "templates"
@@ -170,9 +173,34 @@ func (ws *WalletServer) WalletAmount(w http.ResponseWriter, r *http.Request) {
 }
 
 func (ws *WalletServer) Run() {
-	http.HandleFunc("/", ws.Index)
+	fs := NewNoDirListingServer(templDir)
+	http.Handle("/", fs)
 	http.HandleFunc("/wallet", ws.Wallet)
 	http.HandleFunc("/wallet/amount", ws.WalletAmount)
 	http.HandleFunc("/transaction", ws.CreateTransaction)
 	log.Fatal(http.ListenAndServe("0.0.0.0:"+strconv.Itoa(int(ws.Port())), nil))
+}
+
+type NoDirListingFileServer struct {
+	httpFS http.Handler
+}
+
+func NewNoDirListingServer(dir string) *NoDirListingFileServer {
+	httpFs := http.FileServer(http.Dir(dir))
+	return &NoDirListingFileServer{httpFS: httpFs}
+}
+
+func (ndlfs *NoDirListingFileServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	reqPath := strings.TrimSuffix(strings.TrimPrefix(r.URL.Path, "/"), "/")
+
+	elems := filepath.SplitList(reqPath)
+	if len(elems) > 0 {
+		info, err := os.Stat(path.Join(templDir, reqPath))
+		if err != nil || info.IsDir() {
+			http.Error(w, "path error", http.StatusBadRequest)
+			return
+		}
+	}
+
+	ndlfs.httpFS.ServeHTTP(w, r)
 }
