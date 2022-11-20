@@ -54,6 +54,7 @@ func (bc *Blockchain) Chain() []*Block {
 func (bc *Blockchain) Run() {
 	bc.StartSyncNeighbors()
 	bc.ResolveConflicts()
+	bc.StartMining()
 }
 
 func (bc *Blockchain) SetNeighbors() {
