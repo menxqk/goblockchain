@@ -141,8 +141,8 @@ async function sendTransaction() {
 
 // fadeInElement simulates a fade in using css class fade-in
 function fadeInElement(elem) {
-    elem.classList.remove('fade-in');
+    elem.classList.add('fade-in');
     setTimeout(function () {
-        elem.classList.add('fade-in');
-    }, 100);
+        elem.classList.remove('fade-in');
+    }, 1000);
 }
