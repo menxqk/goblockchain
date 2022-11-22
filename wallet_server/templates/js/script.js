@@ -85,7 +85,9 @@ async function updateWallet() {
 
 // verifySendData check if both send fields have data and enables the sendMoneyButton
 function verifySendData() {
-    if (recipientBlockchainAddress.value != "" && sendAmount.value != "") {
+    let recipient = recipientBlockchainAddress.value;
+    let amount = sendAmount.value;
+    if (recipient && amount) {
         sendMoneyButton.disabled = false;
     } else {
         sendMoneyButton.disabled = true;

@@ -16,80 +16,58 @@
 <body>
   <div class="container py-2">
 
-    <nav class="navbar navbar-light">
+    <nav class="navbar navbar-light mb-5">
       <a href="#" class="navbar-brand">
         <strong class="display-5">Wallet</strong>
       </a>
     </nav>
 
-    <div class="container py-2">
-      <div class="row">
-        <div class="col-sm-8 col-md-6 col-lg-4">
-          <div class="input-group">
-            <span class="input-group-text">$</span>
-            <span id="wallet_amount" class="input-group-text px-4 bg-light">0</span>
-            <button id="reload_wallet" type="button" class="btn btn-secondary btn-lg">
-              <span class="me-2">Reload Wallet</span>
-              <span id="reload_wallet_spinner" class="visually-hidden spinner-border spinner-border-sm"></span>
-            </button>
-          </div>
+    <div class="row mb-5">
+      <div class="col">
+        <div class="input-group mb-3">
+          <span class="input-group-text">$</span>
+          <span id="wallet_amount" class="input-group-text px-4 bg-light">0</span>
+          <button id="reload_wallet" type="button" class="btn btn-secondary btn-lg">
+            <span class="me-2">Reload Wallet</span>
+            <span id="reload_wallet_spinner" class="visually-hidden spinner-border spinner-border-sm"></span>
+          </button>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text bg-light">Public Key</span>
+          <textarea id="public_key" class="form-control form-control-lg" disabled></textarea>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text bg-light">Private Key</span>
+          <input type="text" id="private_key" class="form-control form-control-lg" disabled>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text bg-light">Blockchain Address</span>
+          <input type="text" id="blockchain_address" class="form-control form-control-lg" disabled>
         </div>
       </div>
     </div>
 
-    <div class="container py-2">
-      <div class="row">
-        <div class="col-12 pt-4">
-          <div class="input-group">
-            <span class="input-group-text bg-light">Public Key</span>
-            <textarea id="public_key" type="text" class="form-control form-control-lg" disabled></textarea>
-          </div>
+    <div class="row">
+      <div class="col">
+        <h2 class="mb-3">Send Money</h2>
+        <div class="input-group mb-3">
+          <span class="input-group-text bg-light">Address</span>
+          <input type="text" id="recipient_blockchain_address" class="form-control form-control-lg">
         </div>
-        <div class="col-12 pt-4">
-          <div class="input-group">
-            <span class="input-group-text bg-light">Private Key</span>
-            <input id="private_key" type="text" class="form-control form-control-lg" disabled>
-          </div>
-        </div>
-        <div class="col-12 pt-4">
-          <div class="input-group">
-            <span class="input-group-text bg-light">Blockchain Address</span>
-            <input id="blockchain_address" type="text" class="form-control form-control-lg" disabled>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container py-4">
-      <h2 class="mb-3">Send Money</h2>
-      <div class="row">
-        <div class="col-12 pt-4">
-          <div class="input-group">
-            <span class="input-group-text bg-light">Address</span>
-            <input id="recipient_blockchain_address" type="text" class="form-control form-control-lg">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-md-4 pt-4">
-          <div class="input-group">
-            <div class="input-group-text bg-light">Amount</div>
+        <div class="col-4">
+          <div class="input-group mb-3">
+            <span class="input-group-text bg-light">Amount</span>
             <input type="text" id="send_amount" class="form-control form-control-lg">
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col pt-4">
-          <button id="send_money_button" class="btn btn-primary btn-lg bg-success" disabled>
+        <div class="input-group mb-3">
+          <button type="button" id="send_money_button" class="btn btn-primary btn-lg btn-primary" disabled>
             <span class="me-2">Send</span>
             <span id="send_money_spinner" class="visually-hidden spinner-border spinner-border-sm"></span>
           </button>
         </div>
+
       </div>
-    </div>
-
-    <div>
-
     </div>
 
   </div>
